@@ -8,12 +8,6 @@
 
 ---
 
-## Abstract (from the manuscript)
-
-Glioblastoma is a highly malignant brain tumor in which maximal safe resection is associated with improved survival, yet the oncological benefit of resection varies by molecular subtype. Recent work has shown that DNA methylation–defined subtypes, particularly receptor tyrosine kinase (RTK) I and II, benefit from complete CE (contrast-enriched) resection compared to mesenchymal tumors, highlighting the need for pre- or intraoperative tools that guide resection based on tumor biology. Here, we present **iSTAMP** (*intraoperative Spatially-informed Tumor Architecture Mapping and Profiling*)—a real-time, label-free molecular classification framework using stimulated Raman scattering microscopy and graph-based deep learning to predict glioblastoma epigenetic subtypes intraoperatively (within 5–7 minutes). Across 1,295 intraoperative tissue samples from 237 patients profiled with EPIC methylation arrays, our graph attention network achieved high predictive performance for all major subtypes (AUC 0.88–0.99), with spatially stable predictions across tumor regions. RTK subtypes, but not mesenchymal tumors, showed significant survival benefit from GTR (HR = 0.42, P = 6.1 × 10⁻⁶). Explainable AI revealed subtype-specific histopathological features (e.g., necrosis/macrophage infiltration in mesenchymal; glio-fibrillary matrix/axon-rich regions in RTK). Spatial transcriptomics validated cellular correlates of subtype-specific SRH features. These findings support integrating Raman-based molecular diagnostics into intraoperative workflows to guide biologically informed surgical strategies in glioblastoma.
-
----
-
 ## What’s in this repo
 
 - **/istamp/**
