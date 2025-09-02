@@ -57,6 +57,7 @@ conda activate istamp
 
 # Or using pip (requires CUDA/cuDNN preinstalled for GPU)
 pip install -e .
+```
 
 
 ---
