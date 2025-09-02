@@ -42,7 +42,7 @@
 
 ```bash
 # Clone
-git clone https://github.com/<your-org>/iSTAMP.git
+git clone https://github.com/heilandd/iSTAMP.git
 cd iSTAMP
 
 # Create environment
