@@ -1,84 +1,71 @@
-# iSTAMP: Intraoperative Spatially-informed Tumor Architecture Mapping & Profiling
+# iSTAMP — intraoperative Spatially-informed Tumor Architecture Mapping and Profiling
 
-> **Real-time, label-free molecular classification for glioblastoma** using stimulated Raman microscopy (SRH/SRS) and graph-based deep learning to predict DNA-methylation subtypes intraoperatively.
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+![Status](https://img.shields.io/badge/status-research--only-orange)
+![Python](https://img.shields.io/badge/python-3.10%2B-blue)
 
-![status-badge](https://img.shields.io/badge/status-research-prototype)
-![python-badge](https://img.shields.io/badge/python-3.10%2B-blue)
-![license-badge](https://img.shields.io/badge/license-MIT-green)
+> **Research use only — not for clinical or diagnostic use.**
 
----
+iSTAMP predicts glioblastoma DNA-methylation **epigenetic subtypes** in near real time from
+**stimulated Raman histology (SRH)** images, using a spatially informed **graph attention
+network** over patch-level foundation-model (CONCH) embeddings. It combines local tissue
+morphology with neighbourhood spatial context and provides explainable (attention + integrated
+gradients) attributions.
 
-## What’s in this repo
+This repository contains both:
+- **Analysis & training code** (`src/istamp_analysis/`, audited copies in `src/istamp_analysis_audited/`)
+- **RamanMolecularClassifier** — a cross-platform (macOS/Windows/Ubuntu) **desktop application**
+  (`src/ramanmolecularclassifier/`) with image/metadata/prediction/heatmap/report panels.
 
-- **/istamp/**
-  - `models/` — Graph Attention Network (GAT) and utilities
-  - `inference/` — slide/patch → graph → subtype pipeline (5–7 min)
-  - `explain/` — XAI methods (attention maps, IG, Grad-CAM for SRH)
-  - `prep/` — SRH patch extraction, QC, affine alignment helpers
-  - `metrics/` — AUC/PR, calibration, spatial stability
-- **/configs/** — YAML configs for inference/training
-- **/scripts/** — CLI entry points (`istamp-infer`, `istamp-train`, `istamp-explain`)
-- **/notebooks/** — example walkthroughs (toy data)
-- **/assets/** — figures, schematic diagrams (non-patient)
-- **/tests/** — minimal tests for CI
-- `environment.yml` — conda environment
-- `LICENSE`, `README.md`
+### Evaluation note (important)
+The public release reports **patient-disjoint (leakage-corrected)** evaluation. An earlier
+internal pipeline split data at the subgraph level, which inflated metrics; see
+`docs/model_inference.md` and the manuscript revision for the controlled optimism-gap analysis.
 
-> **Note:** Clinical data and patient images are **not** included. See **Data Access** below.
-
----
-
-## Key features
-
-- **Real-time inference** (target 5–7 minutes) from SRH/SRS snapshot to subtype.
-- **Graph Attention Network** integrating patch-level features + spatial context.
-- **Strong performance** across major GBM methylation subtypes (AUC 0.88–0.99).
-- **Explainable AI**: attention overlays, integrated gradients, Grad-CAM.
-- **Spatial robustness**: stability across regions and multi-sample sites.
-
----
-
-## Installation
-
+## Install
 ```bash
-# Clone
-git clone https://github.com/heilandd/iSTAMP.git
-cd iSTAMP
-
-# Create environment
-conda env create -f environment.yml
-conda activate istamp
-
-# Or using pip (requires CUDA/cuDNN preinstalled for GPU)
-pip install -e .
+conda env create -f environment.yml && conda activate istamp
+# or
+pip install -r requirements.txt
 ```
 
+## Quickstart
+```bash
+# Desktop app
+python -m ramanmolecularclassifier            # (from src/, or after `pip install -e .`)
+# Headless inference on a precomputed graph
+python examples/quickstart.py
+```
+See `examples/reanalysis/` to reproduce the revision analyses (inference, leakage correction,
+graph-density sweep, saturation, leave-one-centre-out external validation).
 
----
 
-### LICENSE (MIT)
 
-Create a file named `LICENSE` with the following contents:
+## Web app (Streamlit)
+An upload-first web app is in [`streamlit_app/`](streamlit_app/): upload one or more biopsy images (single or multiple biopsies per patient), get per-biopsy and patient-level subtype predictions, integrated-gradients interpretability, and a downloadable PDF/HTML/Excel report.
+```bash
+cd streamlit_app && pip install -r requirements.txt && streamlit run app.py
+```
 
-```text
-MIT License
+## Reproducible analysis notebooks
+Step-by-step Jupyter notebooks that reproduce the full revision analysis (inference, leakage-corrected training, graph-density/saturation, external validation, figures) are in
+[`notebooks/`](notebooks/). Create the environment with
+`conda env create -f environment_Raman_Analysis.yml` (env **`Raman_Analysis`**), then
+`jupyter lab` and run `notebooks/00_environment_and_data_overview.ipynb` onward.
 
-Copyright (c) 2025 Dieter Henrik Heiland
+## Documentation
+`docs/`: [installation](docs/installation.md) · [usage](docs/usage.md) ·
+[input formats](docs/input_formats.md) · [model inference](docs/model_inference.md) ·
+[report generation](docs/report_generation.md) · [desktop app](docs/desktop_app.md) ·
+[troubleshooting](docs/troubleshooting.md)
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the “Software”), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
+## Model
+Trained weights (`RamanGATv2MultiBias`) are distributed separately via Zenodo (DOI: *placeholder*).
+See `models/model_card.md`.
 
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
+## Citation
+Straehle, Neidert, Villa, … Heiland *et al.* *Intraoperative classification of glioblastoma
+through near real-time stimulated Raman scattering microscopy.* (under revision, Nature Communications, 2026).
 
-THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
+## License
+MIT (see `LICENSE`). Research use only.

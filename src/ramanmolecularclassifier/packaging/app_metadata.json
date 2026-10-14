@@ -1,0 +1,25 @@
+{
+  "app_name": "RamanMolecularClassifier",
+  "subtitle": "iSTAMP Desktop",
+  "version": "1.0.0",
+  "identifier": "org.istamp.ramanmolecularclassifier",
+  "description": "Cross-platform desktop classifier for Raman/SRH glioblastoma molecular subtyping (Nature Communications revision package).",
+  "entry_point": "ramanmolecularclassifier.app:main",
+  "module_run": "python -m ramanmolecularclassifier",
+  "platforms": ["macOS", "Windows", "Ubuntu/Linux"],
+  "framework": "PySide6",
+  "classes": ["GBM_MES_TYP", "GBM_MES_ATYP", "GBM_RTK1", "GBM_RTK2", "GBM_PNC"],
+  "model": {
+    "architecture": "RamanGATv2MultiBias",
+    "checkpoint": "best_model_full.pt",
+    "in_channels": 512,
+    "hidden_channels": 256,
+    "out_channels": 5,
+    "num_heads": 8,
+    "num_layers": 4
+  },
+  "primary_input_format": "Precomputed PyG graph files (Img_*_pyg.pt)",
+  "raw_image_inference": "Requires CONCH foundation model (not bundled); viewer + metadata + QC only.",
+  "research_use_only": true,
+  "data_bundling_note": "best_model_full.pt is NOT auto-bundled by these scripts. Place a copy next to the executable or set RMC_CHECKPOINT. Patient SRH images are never bundled."
+}

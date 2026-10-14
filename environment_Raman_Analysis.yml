@@ -1,0 +1,43 @@
+# Conda environment for the iSTAMP revision analysis notebooks.
+#   conda env create -f environment.yml
+#   conda activate Raman_Analysis
+#   python -m ipykernel install --user --name Raman_Analysis --display-name "Raman_Analysis"
+#   jupyter lab      # then open notebooks/00_environment_and_data_overview.ipynb
+#
+# Note: torch_geometric wheels must match your torch/CUDA build; the pip lines below
+# install CPU/where-available builds. For GPU, follow https://pytorch-geometric.readthedocs.io.
+# CONCH foundation-model weights are NOT redistributed and are only required to embed
+# raw new SRH images; the notebooks run on the provided precomputed graphs.
+name: Raman_Analysis
+channels:
+  - conda-forge
+dependencies:
+  - python=3.10
+  - pip
+  - pip:
+      # deep learning / graphs
+      - torch>=2.2
+      - torch_geometric>=2.5
+      # scientific stack
+      - numpy>=1.24
+      - pandas>=2.0
+      - scipy>=1.10
+      - scikit-learn>=1.3
+      # plotting
+      - matplotlib>=3.7
+      - seaborn>=0.12
+      # imaging / IO
+      - Pillow>=10.0
+      - tifffile>=2023.7
+      - pydicom>=2.4
+      - openpyxl>=3.1
+      - reportlab>=4.0
+      # desktop app (optional, for the iSTAMP package)
+      - PySide6>=6.5
+      # notebooks
+      - streamlit>=1.30
+      - jupyterlab>=4.0
+      - notebook>=7.0
+      - ipykernel>=6.25
+      - nbformat>=5.9
+      - tqdm>=4.65

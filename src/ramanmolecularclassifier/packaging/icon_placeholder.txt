@@ -1,0 +1,14 @@
+ICON PLACEHOLDER
+================
+
+No application icon is bundled in this revision package. Provide platform icons
+before a public release:
+
+  * macOS   : icon.icns   (referenced via PyInstaller --icon)
+  * Windows : icon.ico    (referenced via PyInstaller --icon)
+  * Linux   : ramanmolecularclassifier.png (256x256) for the .desktop / AppImage
+
+Suggested visual: a stylised Raman spectrum peak over a brain-tissue motif,
+in the iSTAMP palette (#1f3b5c deep blue). Generate the three formats from a
+single 1024x1024 master PNG, then add `--icon path/to/icon.icns` (mac) /
+`--icon path\to\icon.ico` (windows) to the build scripts.

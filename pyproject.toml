@@ -1,0 +1,19 @@
+[build-system]
+requires = ["setuptools>=64", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "istamp"
+version = "1.0.0"
+description = "iSTAMP — intraoperative Spatially-informed Tumor Architecture Mapping and Profiling: stimulated Raman histology + graph attention networks for glioblastoma epigenetic subtyping."
+readme = "README.md"
+requires-python = ">=3.10"
+license = {text = "MIT"}
+authors = [{name = "iSTAMP authors / PRECISE Consortium"}]
+keywords = ["stimulated-raman-histology", "graph-neural-network", "glioblastoma", "intraoperative", "digital-pathology"]
+
+[project.scripts]
+ramanmolecularclassifier = "ramanmolecularclassifier.app:main"
+
+[tool.setuptools]
+package-dir = {"" = "src"}
