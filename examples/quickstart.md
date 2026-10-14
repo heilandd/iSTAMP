@@ -9,13 +9,13 @@
 - `reanalysis/` — full revision analyses (paths point to the project data; adapt `_lib_raman.DATA`).
 
 ## Running on real data
-The real cohort graphs (`Img_*_pyg.pt`) and the Visium data are patient-derived and are distributed via
-the Zenodo record (see `models/model_card.md`), not committed to this repository. After downloading
-them, point the notebook/app at the folder:
+The real cohort graphs (`Img_*_pyg.pt`) and the Visium data are patient-derived and are **not** included
+in this repository (see the manuscript's Data Availability statement). Once you have them, point the
+notebook/app at the folder:
 
 ```bash
 export RAMAN_MODEL=models/best_model_full.pt
-export RAMAN_DATA=/path/to/zenodo/graphs      # folder of Img_*_pyg.pt
+export RAMAN_DATA=/path/to/cohort/graphs       # folder of Img_*_pyg.pt
 jupyter lab examples/example_inference.ipynb
 # or the interactive app:
 streamlit run streamlit_app/app.py

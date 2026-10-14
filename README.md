@@ -60,8 +60,8 @@ Step-by-step Jupyter notebooks that reproduce the full revision analysis (infere
 [troubleshooting](docs/troubleshooting.md)
 
 ## Model
-Trained weights (`RamanGATv2MultiBias`) are distributed separately via Zenodo (DOI: *placeholder*).
-See `models/model_card.md`.
+Trained weights (`RamanGATv2MultiBias`) are included in this repository at
+`models/best_model_full.pt` (~14 MB). See `models/model_card.md`.
 
 ## Citation
 Straehle, Neidert, Villa, … Heiland *et al.* *Intraoperative classification of glioblastoma
