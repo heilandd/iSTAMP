@@ -1,3 +1,5 @@
 # Models
-Trained weights are released via Zenodo (DOI: **placeholder — to be inserted on deposition**).
-`download_models.py` is a stub for fetching them. Do not commit `.pt`/`.pth` files (see `.gitignore`).
+
+The trained weights are included in this repository: **`models/best_model_full.pt`**
+(GATv2 `RamanGATv2MultiBias`, ~14 MB). See `model_card.md` for architecture, training data and
+intended use.
